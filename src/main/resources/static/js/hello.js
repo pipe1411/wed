@@ -9,6 +9,10 @@ angular.module('hello', [ 'ngRoute' ])
         templateUrl : 'login.html',
         controller : 'navigation',
         controllerAs : 'controller'
+    }).when('/registration', {
+        templateUrl : 'registration.html',
+        controller : 'navigation',
+        controllerAs : 'controller'
     }).otherwise('/');
 
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -17,6 +21,20 @@ angular.module('hello', [ 'ngRoute' ])
     .controller('navigation', function($rootScope, $http, $location, $route) {
 
     var self = this;
+
+    var newAccount = function (credentials) {
+        var username = credentials.username;
+        var password = credentials.password;
+        var data = {
+            username:username,
+            password:password
+        };
+        $http.post('register',data).then(function (response) {
+            console.log(response);
+        },function () {
+            console.log("something happened");
+        });
+    };
 
     var authenticate = function(credentials, callback) {
 
@@ -55,6 +73,9 @@ angular.module('hello', [ 'ngRoute' ])
                     $rootScope.authenticated = false;
                 }
             })
+        };
+        self.register = function () {
+            newAccount(self.credentials);
         };
         self.logout = function() {
         $http.post('logout', {}).finally(function() {

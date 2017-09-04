@@ -14,21 +14,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.session.data.redis.config.ConfigureRedisAction;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * Created by pipe on 8/28/17.
  */
 
 @Configuration
-/*@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)*/
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
-/*    @Autowired
+/*@EnableWebSecurity*/
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
-    }*/
+    }
 
 
     @Bean
@@ -42,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll()
+                .antMatchers("/index.html", "/home.html", "/login.html", "/registration.html","/register","/").permitAll()
                 .anyRequest().authenticated().and()
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
@@ -60,8 +62,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .permitAll();*//*
     }*/
 
-/*    @Autowired
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());    }*/
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());    }
 
 }
