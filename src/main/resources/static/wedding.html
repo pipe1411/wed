@@ -1,0 +1,261 @@
+<!-- Wrapper-->
+<div id="wrapper">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-9">
+                <h2>Widgets</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="active">
+                        <strong>Widgets</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="widget style1 navy-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-map fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> City: {{myWedding.location.address.city}} </span>
+                                <span> State: {{myWedding.location.address.state}} </span>
+                                <span> Country: {{myWedding.location.address.city}} </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="widget style1 lazur-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-calendar fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Date: {{myWedding.date}} </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="widget style1 yellow-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-music fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Guests </span>
+
+                                <h2 class="font-bold">{{myWedding.guests.size()}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+<!--            <div class="row m-t-lg">
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+
+                            <div>
+                                <div class="chat-activity-list">
+
+                                    <div class="chat-element">
+                                        <a href="" class="pull-left">
+                                            <img alt="image" class="img-circle" src="img/a2.jpg">
+                                        </a>
+
+                                        <div class="media-body ">
+                                            <small class="pull-right text-navy">1m ago</small>
+                                            <strong>Mike Smith</strong>
+
+                                            <p class="m-b-xs">
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                                            </p>
+                                            <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-element right">
+                                        <a href="" class="pull-right">
+                                            <img alt="image" class="img-circle" src="img/a4.jpg">
+                                        </a>
+
+                                        <div class="media-body text-right ">
+                                            <small class="pull-left">5m ago</small>
+                                            <strong>John Smith</strong>
+
+                                            <p class="m-b-xs">
+                                                Lorem Ipsum is simply dummy text of the printing.
+                                            </p>
+                                            <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-element ">
+                                        <a href="" class="pull-left">
+                                            <img alt="image" class="img-circle" src="img/a2.jpg">
+                                        </a>
+
+                                        <div class="media-body ">
+                                            <small class="pull-right">2h ago</small>
+                                            <strong>Mike Smith</strong>
+
+                                            <p class="m-b-xs">
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                                            </p>
+                                            <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-form">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <textarea class="form-control" placeholder="Message"></textarea>
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Send message</strong></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6">
+                    <div>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-danger m-r-sm">12</button>
+                                    Total messages
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary m-r-sm">28</button>
+                                    Posts
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-info m-r-sm">15</button>
+                                    Comments
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-info m-r-sm">20</button>
+                                    News
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-success m-r-sm">40</button>
+                                    Likes
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger m-r-sm">30</button>
+                                    Notifications
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-warning m-r-sm">20</button>
+                                    Albums
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-default m-r-sm">40</button>
+                                    Groups
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-warning m-r-sm">30</button>
+                                    Permissions
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="ibox-content text-center">
+                                    <h1>Nicki Smith</h1>
+
+                                    <div class="m-b-sm">
+                                        <img alt="image" class="img-circle" src="img/a8.jpg">
+                                    </div>
+                                    <p class="font-bold">Consectetur adipisicing</p>
+
+                                    <div class="text-center">
+                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                        <a class="btn btn-xs btn-primary"><i class="fa fa-heart"></i> Love</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ibox-content">
+                                    <div>
+                                        <div>
+                                            <span>Memory</span>
+                                            <small class="pull-right">10/200 GB</small>
+                                        </div>
+                                        <div class="progress progress-small">
+                                            <div style="width: 60%;" class="progress-bar"></div>
+                                        </div>
+
+                                        <div>
+                                            <span>Bandwidth</span>
+                                            <small class="pull-right">20 GB</small>
+                                        </div>
+                                        <div class="progress progress-small">
+                                            <div style="width: 50%;" class="progress-bar"></div>
+                                        </div>
+
+                                        <div>
+                                            <span>Activity</span>
+                                            <small class="pull-right">73%</small>
+                                        </div>
+                                        <div class="progress progress-small">
+                                            <div style="width: 40%;" class="progress-bar"></div>
+                                        </div>
+
+                                        <div>
+                                            <span>FTP</span>
+                                            <small class="pull-right">400 GB</small>
+                                        </div>
+                                        <div class="progress progress-small">
+                                            <div style="width: 20%;" class="progress-bar progress-bar-danger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>-->
+
+
+
+
+        </div>
+
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
