@@ -1,4 +1,4 @@
-angular.module('hello', [ 'ngRoute' ])
+angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
     .config(function($routeProvider, $httpProvider) {
 
     $routeProvider.when('/', {
@@ -30,11 +30,24 @@ angular.module('hello', [ 'ngRoute' ])
 
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-})
-    .controller('navigation', function($rootScope, $http, $location, $routeParams ,$route) {
+}).factory('weddingGuuid', function() {
+    var savedData = {}
+    function set(guuid) {
+        savedData = guuid;
+    }
+    function get() {
+        return savedData;
+    }
+
+    return {
+        set: set,
+        get: get
+    }
+}).controller('navigation', ['$rootScope', '$http', '$location', '$routeParams' ,'$route','$uibModal','weddingGuuid', function($rootScope, $http, $location, $routeParams ,$route,$uibModal,weddingGuuid) {
 
     var self = this;
-
+    self.guestPost = {};
+    self.wedGuuid = "";
     var sendWedding = function (form) {
         var data = {
             name:form.name,
@@ -57,6 +70,7 @@ angular.module('hello', [ 'ngRoute' ])
     };
 
     var getMyWeddings = function () {
+        $rootScope.myWedding = null;
         $http.get('getWeddings').then(function (response) {
             console.log(response.data);
             $rootScope.weddings = response.data;
@@ -66,7 +80,13 @@ angular.module('hello', [ 'ngRoute' ])
     };
 
     var getMyWedding = function (guuid) {
-        $http.get('getWedding',{guuid:guuid}).then(function (response) {
+        self.wedGuuid = guuid;
+        weddingGuuid.set(guuid);
+        console.log(typeof guuid);
+        var data = {
+            guuid:guuid
+        }
+        $http.post('/getWedding/',data).then(function (response) {
             $rootScope.myWedding = response.data;
         },function () {
             console.log("Something happened retrieving a wedding");
@@ -147,13 +167,81 @@ angular.module('hello', [ 'ngRoute' ])
             getMyWeddings();
         };
         self.getWedding = function (guuid) {
+            self.wedGuuid = guuid;
             getMyWedding(guuid);
-        }
+        };
+        self.openGuestModal = function () {
+            $uibModal.open({
+                templateUrl: 'newGuest.html',
+                controller: 'ModalInstanceCtrl',
+                resolve : {
+                    guestPost : function() {
+                        return self.guestPost;
+                    }
+                }
+            }).result.then(function (result) {
+                self.guestPost = result;
+                $http
+                    .post('addGuest',self.guestPost)
+                    .success(function (data) {
+                        console.log("success")
+                    })
+                    .error(function (data, status) {
+                        console.log(status);
+                    });
+                self.$apply();
 
-    })
+            });
+        };
+
+    }])
     .controller('home', function($http) {
         var self = this;
+        self.helloWorld = "hello world from home controller";
         $http.get('/resource/').then(function(response) {
             self.greeting = response.data;
         })
+    })
+    .controller('ModalInstanceCtrl', function ($scope,$uibModalInstance,$http,weddingGuuid,guestPost) {
+        $scope.guestPost = guestPost;
+
+        $scope.button = "rsvp";
+        $scope.actions = [
+            "Attending", "Not Attending", "Pending"
+        ];
+
+        $scope.change = function(name){
+            $scope.button = name;
+        };
+
+
+        $scope.ok = function () {
+            $scope.guestPost.rsvp = $scope.button;
+            var wguuid = weddingGuuid.get();
+            $scope.guestPost.guest=$scope.guest;
+            $scope.guestPost.guuid=wguuid;
+            var data = {guest:$scope.guest,guuid:wguuid};
+            $uibModalInstance.close($scope.guestPost);
+        };
+
+        $scope.addGuest = function () {
+            $scope.guest.rsvp = $scope.button;
+            var wguuid = weddingGuuid.get();
+
+            $scope.guestPost.guest=$scope.guest;
+            $scope.guestPost.guuid=wguuid;
+            var data = {guest:$scope.guest,guuid:wguuid};
+            $http
+                .post('addGuest',data)
+                .success(function (data) {
+                    $scope.cancel();
+                })
+                .error(function (data, status) {
+                    console.log(status);
+                });
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
     });

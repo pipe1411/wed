@@ -39,8 +39,7 @@
 
                         <tbody>
                         <tr ng-repeat="wed in weddings">
-
-                            <td>{{wed.name}}<a href="#/myWedding/{{index}}"/></td>
+                            <td><a href="#/myWedding/{{wed.guuid}}">{{wed.name}}</a></td>
                         </tr>
                         </tbody>
                     </table>

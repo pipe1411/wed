@@ -1,7 +1,6 @@
 package com.me.wed.controllers;
 
-import com.me.wed.domain.User;
-import com.me.wed.domain.Wedding;
+import com.me.wed.domain.*;
 import com.me.wed.services.WeddingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -70,19 +69,30 @@ public class resource {
        return weddings;
     }
 
-    @RequestMapping(value = "/getWedding", method = RequestMethod.GET)
-    public Wedding getWedding(@RequestParam("guuid") String guuid) {
+    @RequestMapping(value = "/getWedding", method = RequestMethod.POST)
+    public Wedding getWedding(@RequestBody Guuid guuid) {
         Iterable<Wedding> weddingIterable = weddingService.findAllWeddings();
         Iterator<Wedding> weddingIterator = weddingIterable.iterator();
 
         while (weddingIterator.hasNext()) {
             Wedding wedding = weddingIterator.next();
-            if (wedding.getEmail().equals(getLoggedUser()) && wedding.getGuuid().equals(guuid)) {
+            if (wedding.getEmail().equals(getLoggedUser()) && wedding.getGuuid().equals(guuid.getGuuid())) {
                 return wedding;
             }
         }
 
         return null;
+    }
+
+    @RequestMapping(value = "/addGuest", method = RequestMethod.POST)
+    public String addGuest(@RequestBody GuestPost guestPost) {
+        String guuid = guestPost.getGuuid();
+        Guest guest = guestPost.getGuest();
+        if (weddingService.addGuest(guuid,guest)){
+            return "{\"response\":\"success\"}";
+        } else {
+            return "{\"response\":\"fail\"}";
+        }
     }
 
     private String getLoggedUser() {

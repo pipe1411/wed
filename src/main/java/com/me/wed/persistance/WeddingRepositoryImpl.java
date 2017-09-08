@@ -61,7 +61,7 @@ public class WeddingRepositoryImpl implements WeddingService {
 
     @Override
     public boolean addGuest(String id, Guest guest) {
-        Query query = new Query(Criteria.where("email").is(id));
+        Query query = new Query(Criteria.where("guuid").is(id));
         Update update = new Update();
         update.addToSet("guests",guest);
 
@@ -69,7 +69,7 @@ public class WeddingRepositoryImpl implements WeddingService {
         WriteResult writeResult = mongoTemplate.updateFirst(query,update,Wedding.class);
 
         if (writeResult.isUpdateOfExisting()) {
-            log.debug("ADDED GUEST TO FOLLOWING ACCOUNT EMAIL: " + id);
+            log.debug("ADDED GUEST TO FOLLOWING ACCOUNT GUUID: " + id);
             return true;
         }else {
             log.warn("UNABLE TO ADD GUEST");
@@ -81,7 +81,7 @@ public class WeddingRepositoryImpl implements WeddingService {
 
     @Override
     public boolean addGuests(String id, List<Guest> guests) {
-        Query query = new Query(Criteria.where("email").is(id));
+        Query query = new Query(Criteria.where("guuid").is(id));
         Update update = new Update();
         update.addToSet("guests",guests);
 

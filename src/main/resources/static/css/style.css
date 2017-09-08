@@ -1,0 +1,145 @@
+.widget {
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.widget.style1 h2 {
+    font-size: 30px;
+}
+.widget h2,
+.widget h3 {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+.widget-text-box {
+    padding: 20px;
+    border: 1px solid #e7eaec;
+    background: #ffffff;
+}
+.widget-head-color-box {
+    border-radius: 5px 5px 0 0;
+    margin-top: 10px;
+}
+.widget .flot-chart {
+    height: 100px;
+}
+
+
+#wrapper {
+    width: 100%;
+    overflow-x: hidden;
+}
+.wrapper {
+    padding: 0 20px;
+}
+.wrapper-content {
+    padding: 20px 10px 40px;
+}
+#page-wrapper {
+    padding: 0 15px;
+    min-height: 568px;
+    position: relative !important;
+}
+@media (min-width: 768px) {
+    #page-wrapper {
+        position: inherit;
+        margin: 0 0 0 240px;
+        min-height: 2002px;
+    }
+}
+.title-action {
+    text-align: right;
+    padding-top: 30px;
+}
+.ibox-content h1,
+.ibox-content h2,
+.ibox-content h3,
+.ibox-content h4,
+.ibox-content h5,
+.ibox-title h1,
+.ibox-title h2,
+.ibox-title h3,
+.ibox-title h4,
+.ibox-title h5 {
+    margin-top: 5px;
+}
+
+.navy-bg {
+    background-color: #1ab394;
+    color: #ffffff;
+}
+
+.lazur-bg {
+    background-color: #23c6c8;
+    color: #ffffff;
+}
+
+.yellow-bg{
+    background-color: #f8ac59;
+    color: #ffffff;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+}
+.btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-size: 18px;
+    line-height: 1.33;
+}
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.modal-content {
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    outline: 0 none;
+    position: relative;
+}
+.modal-dialog {
+    z-index: 2200;
+}
+.modal-body {
+    padding: 20px 30px 30px 30px;
+}
+.inmodal .modal-body {
+    background: #f8fafb;
+}
+.inmodal .modal-header {
+    padding: 30px 15px;
+    text-align: center;
+}
+.animated.modal.fade .modal-dialog {
+    -webkit-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+.inmodal .modal-title {
+    font-size: 26px;
+}
+.inmodal .modal-icon {
+    font-size: 84px;
+    color: #e2e3e3;
+}
+.modal-footer {
+    margin-top: 0;
+}

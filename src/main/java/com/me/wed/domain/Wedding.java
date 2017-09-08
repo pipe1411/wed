@@ -15,12 +15,12 @@ import java.util.List;
 @Document(collection="wedding")
 public class Wedding {
     private Owner owner;
-    @Id
     private String email;
     private String name;
     private ArrayList<Guest> guests = new ArrayList<>();
     private Location location;
     private String date;
+    @Id
     private String guuid;
 
     public String getGuuid() {
