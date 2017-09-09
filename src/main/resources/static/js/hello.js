@@ -48,6 +48,7 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
     var self = this;
     self.guestPost = {};
     self.wedGuuid = "";
+
     var sendWedding = function (form) {
         var data = {
             name:form.name,
@@ -92,6 +93,10 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
             console.log("Something happened retrieving a wedding");
         })
     };
+
+    self.currentGuest = function (index) {
+        self.viewGuest = $rootScope.myWedding.guests[index];
+    }
 
     if($routeParams.id) {
         getMyWedding($routeParams.id);
@@ -216,9 +221,9 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
 
 
         $scope.ok = function () {
-            $scope.guestPost.rsvp = $scope.button;
             var wguuid = weddingGuuid.get();
             $scope.guestPost.guest=$scope.guest;
+            $scope.guestPost.guest.rsvp = $scope.button;
             $scope.guestPost.guuid=wguuid;
             var data = {guest:$scope.guest,guuid:wguuid};
             $uibModalInstance.close($scope.guestPost);
