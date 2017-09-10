@@ -10,10 +10,5 @@
     </group>
     <group name="g2">
         <css>/static/css/style.css</css>
-        <css>/static/css/plugins/**</css>
-        <css>/static/css/fonts/**</css>
-        <img>/static/css/fonts/**</img>
-        <js>/static/js/plugins/**</js>
-        <js>/static/js/ui-router/**</js>
     </group>
 </groups>
