@@ -6990,6 +6990,13 @@ body.landing-page {
     color: #676a6c;
     font-family: 'Open Sans', helvetica, arial, sans-serif;
     background-color: #fff;
+    padding-top: 65px;
+}
+
+@media (max-width: 979px) {
+    body {
+        padding-top: 0px;
+    }
 }
 .landing-page {
     /* CUSTOMIZE THE NAVBAR
@@ -8720,5 +8727,9 @@ body.md-skin {
 }
 h1.wow {
     font-family: 'Great Vibes', cursive;
+}
+
+#main {
+    padding-top: 65px;
 }
 
