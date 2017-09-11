@@ -25,8 +25,11 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
         templateUrl : 'wedding.html',
         controller : 'navigation',
         controllerAs : 'controller'
-    })
-        .otherwise('/');
+    }).when('/landing', {
+            templateUrl : 'landing.html',
+            controller : 'navigation',
+            controllerAs : 'controller'
+    }).otherwise('/');
 
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

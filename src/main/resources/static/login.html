@@ -1,3 +1,4 @@
+<!--
 <div class="alert alert-danger" ng-show="controller.error">
     There was a problem logging in. Please try again.
 </div>
@@ -7,8 +8,40 @@
                                                        class="form-control" id="username" name="username" ng-model="controller.credentials.username"/>
     </div>
     <div class="form-group">
-        <label for="password">Password:</label> <input type="password"
-                                                       class="form-control" id="password" name="password" ng-model="controller.credentials.password"/>
+        <label for="password">Password:</label> <input type="password" class="form-control" id="password" name="password" ng-model="controller.credentials.password"/>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+-->
+
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
+            <h4 class="logo-name">Event Manager</h4>
+        </div>
+        <h5>Welcome to Event Manager</h5>
+        <p>
+        </p>
+        <p>Login in.</p>
+
+        <div class="alert alert-danger" ng-show="controller.error">
+            There was a problem logging in. Please try again.
+        </div>
+
+        <form class="m-t" role="form" ng-submit="controller.login()">
+            <div class="form-group">
+                <!--<label for="username"></label>--> <input placeholder="Username" type="text" class="form-control" id="username" name="username" ng-model="controller.credentials.username"/>
+            </div>
+            <div class="form-group">
+                <!--<label for="password">Password:</label> --><input placeholder="Password" type="password" class="form-control" id="password" name="password" ng-model="controller.credentials.password" required=""/>
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+            <a ui-sref="forgot_password"><small>Forgot password?</small></a>
+            <p class="text-muted text-center"><small>Do not have an account?</small></p>
+            <a href="#/register" class="btn btn-sm btn-white btn-block" ui-sref="register">Create an account</a>
+        </form>
+        <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+    </div>
+</div>
