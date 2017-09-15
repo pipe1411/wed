@@ -188,6 +188,7 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
                     }
                 }
             }).result.then(function (result) {
+                $rootScope.myWedding.guests.push(result.guest);
                 self.guestPost = result;
                 $http
                     .post('addGuest',self.guestPost)
