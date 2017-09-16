@@ -1,4 +1,4 @@
-<div class="alert alert-danger" ng-show="controller.error">
+<<!--div class="alert alert-danger" ng-show="controller.error">
     There was a problem with the registration. Please try again.
 </div>
 <h1>Please Register</h1>
@@ -12,4 +12,40 @@
                                                        class="form-control" id="password" name="password" ng-model="controller.credentials.password"/>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form>-->
+
+
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+    <div>
+        <div>
+            <h4 class="logo-name">Event Manager</h4>
+        </div>
+        <h5>Register to Event Manager</h5>
+        <p>Create account to see it in action.</p>
+        <div class="alert alert-danger" ng-show="controller.error || controller.registererror">
+            There was a problem with the registration. Please try again.
+        </div>
+
+        <form class="m-t" role="form" ng-submit="controller.register()" ng-hide="controller.registrationSuccess">
+           <!-- <div class="form-group">
+                <input type="text" class="form-control" placeholder="Name" required="">
+            </div>-->
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email" name="username"  ng-model="controller.credentials.username" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" name="password" ng-model="controller.credentials.password" required="">
+            </div>
+            <div class="form-group">
+                <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Agree the terms and policy </label></div>
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+
+            <p class="text-muted text-center"><small>Already have an account?</small></p>
+            <a class="btn btn-sm btn-white btn-block" href="#/login">Login</a>
+        </form>
+        <div class="alert alert-success" ng-show="controller.registrationSuccess">
+            You have successfully registered to Event Manager.
+        </div>
+    </div>
+</div>

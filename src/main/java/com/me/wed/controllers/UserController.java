@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by pipe on 9/4/17.
  */
@@ -19,15 +22,16 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
 /*    public String registration(@ModelAttribute("data") User data, BindingResult bindingResult, Model model)*/
-    public String registration(@RequestBody User user,BindingResult bindingResult){
-
+    public Map<String,Object> registration(@RequestBody User user, BindingResult bindingResult){
+        Map<String,Object> model = new HashMap<>();
         if (bindingResult.hasErrors()) {
-            return "registration";
+            model.put("result","binding error");
+            return model;
         }
 
         userService.saveUser(user);
+        model.put("result","success");
 
-
-        return "success";
+        return model;
     }
 }

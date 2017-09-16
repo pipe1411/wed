@@ -51,6 +51,7 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
     var self = this;
     self.guestPost = {};
     self.wedGuuid = "";
+    self.registrationSuccess = false;
 
     var sendWedding = function (form) {
         var data = {
@@ -113,7 +114,12 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
             password:password
         };
         $http.post('register',data).then(function (response) {
-            console.log(response);
+            if (response.data.result === "success"){
+                $rootScope.registrationSuccess = true;
+            }
+            else {
+                $rootScope.registererror = true;
+            }
         },function () {
             console.log("something happened");
         });
