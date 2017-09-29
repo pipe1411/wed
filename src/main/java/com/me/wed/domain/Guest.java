@@ -14,6 +14,15 @@ public class Guest {
     private String email;
     private String rsvp;
     private String telephone;
+    private String guuid;
+
+    public String getGuuid() {
+        return this.guuid;
+    }
+
+    public void setGuuid(String guuid) {
+        this.guuid = guuid;
+    }
 
     public String getRsvp() {
         return rsvp;

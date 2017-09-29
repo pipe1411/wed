@@ -24,4 +24,7 @@ public interface WeddingService  {
     boolean addGuest(String id, Guest guest);
 
     boolean addGuests(String id, List<Guest> guests);
+
+    boolean updateGuest(String id,Guest guest);
+
 }

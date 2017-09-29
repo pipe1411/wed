@@ -258,7 +258,7 @@
                     <h2>Guest List</h2>
 
                     <div class="input-group">
-                        <input type="text" placeholder="Search client " class="input form-control">
+                        <input type="text" placeholder="Search guest" class="input form-control" ng-model="searchKeyword.name">
                         <span class="input-group-btn">
                                         <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Search</button>
                                 </span>
@@ -269,11 +269,12 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
                                     <tbody>
-                                    <tr ng-repeat="guest in myWedding.guests">
+                                    <tr ng-repeat="guest in myWedding.guests | filter: searchKeyword | orderBy:'name'">
                                         <td><a ng-click="controller.currentGuest($index)" class="client-link"> {{guest.name|lowercase}}</a></td>
                                         <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                                         <td> {{guest.email}}</td>
                                         <td class="client-status"><span ng-class="guest.rsvp == 'Attending' ? 'label label-primary' : (guest.rsvp == 'Not Attending' ? 'label label-danger' : 'label label-warning')">{{guest.rsvp}}</span></td>
+                                        <td><a ng-click="controller.openGuestEditModal(guest)"><i class="fa fa-edit"> </i></a></td>
                                     </tr>
                                     </tbody>
                                 </table>

@@ -15,7 +15,11 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 
 /**
@@ -88,6 +92,36 @@ public class WeddingRepositoryImpl implements WeddingService {
         WriteResult writeResult = mongoTemplate.updateFirst(query,update,Wedding.class);
         return writeResult.getN() == 0 ? false:true;
     }
+
+    @Override
+    public boolean updateGuest(String id, Guest guest) {
+        Wedding wedding = weddingRepository.findOne(id);
+        assert(guest.getGuuid() != null);
+        assert(wedding.getGuests() != null);
+        List<Guest> guests = wedding.getGuests().stream().filter(Objects::nonNull).filter(gst-> gst.getGuuid()!=null && !gst.getGuuid().equalsIgnoreCase(guest.getGuuid())).collect(Collectors.toList());
+        guests.add(guest);
+        wedding.setGuests((ArrayList<Guest>) guests);
+        weddingRepository.save(wedding);
+        return true;
+/*        Query query = new Query(Criteria.where("guuid").is(id));
+        Update update = new Update();
+        update.addToSet("guests",guest);
+
+
+        WriteResult writeResult = mongoTemplate.updateFirst(query,update,Wedding.class);
+
+        if (writeResult.isUpdateOfExisting()) {
+            log.debug("ADDED GUEST TO FOLLOWING ACCOUNT GUUID: " + id);
+            return true;
+        }else {
+            log.warn("UNABLE TO ADD GUEST");
+            return false;
+        }*/
+
+
+    }
+
+
 
 
 }

@@ -185,6 +185,7 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
             getMyWedding(guuid);
         };
         self.openGuestModal = function () {
+            self.guestPost={};
             $uibModal.open({
                 templateUrl: 'newGuest.html',
                 controller: 'ModalInstanceCtrl',
@@ -209,6 +210,34 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
             });
         };
 
+
+
+        self.openGuestEditModal = function (gst) {
+            self.guestPost = gst;
+            $uibModal.open({
+                templateUrl: 'editGuest.html',
+                controller: 'ModalInstanceEditCtrl',
+                resolve : {
+                    guestPost : function() {
+                        return self.guestPost;
+                    }
+                }
+            }).result.then(function (result) {
+
+
+                $http
+                    .post('updateGuest',result)
+                    .success(function (data) {
+                        console.log("success")
+                    })
+                    .error(function (data, status) {
+                        console.log(status);
+                    });
+                self.$apply();
+
+            });
+        };
+
     }])
     .controller('home', function($http) {
         var self = this;
@@ -219,6 +248,8 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
     })
     .controller('ModalInstanceCtrl', function ($scope,$uibModalInstance,$http,weddingGuuid,guestPost) {
         $scope.guestPost = guestPost;
+
+        /*$scope.guest = guestPost;*/
 
         $scope.button = "rsvp";
         $scope.actions = [
@@ -259,4 +290,49 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-    });
+    })
+    .controller('ModalInstanceEditCtrl', function ($scope,$uibModalInstance,$http,weddingGuuid,guestPost) {
+        $scope.guestPost = {};
+        $scope.guest = guestPost;
+        /*$scope.guest = guestPost;*/
+
+        $scope.button = guestPost.rsvp;
+        $scope.actions = [
+            "Attending", "Not Attending", "Pending"
+        ];
+
+        $scope.change = function(name){
+            $scope.button = name;
+        };
+
+
+        $scope.ok = function () {
+            var wguuid = weddingGuuid.get();
+            $scope.guestPost.guest=$scope.guest;
+            $scope.guestPost.guest.rsvp = $scope.button;
+            $scope.guestPost.guuid=wguuid;
+            var data = {guest:$scope.guest,guuid:wguuid};
+            $uibModalInstance.close($scope.guestPost);
+        };
+
+        $scope.addGuest = function () {
+            $scope.guest.rsvp = $scope.button;
+            var wguuid = weddingGuuid.get();
+
+            $scope.guestPost.guest=$scope.guest;
+            $scope.guestPost.guuid=wguuid;
+            var data = {guest:$scope.guest,guuid:wguuid};
+            $http
+                .post('addGuest',data)
+                .success(function (data) {
+                    $scope.cancel();
+                })
+                .error(function (data, status) {
+                    console.log(status);
+                });
+        };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});

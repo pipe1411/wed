@@ -86,9 +86,10 @@ public class resource {
 
     @RequestMapping(value = "/addGuest", method = RequestMethod.POST)
     public String addGuest(@RequestBody GuestPost guestPost) {
-        String guuid = guestPost.getGuuid();
+        String weddingGuuid = guestPost.getGuuid();
         Guest guest = guestPost.getGuest();
-        if (weddingService.addGuest(guuid,guest)){
+        guest.setGuuid(UUID.randomUUID().toString());
+        if (weddingService.addGuest(weddingGuuid,guest)){
             return "{\"response\":\"success\"}";
         } else {
             return "{\"response\":\"fail\"}";
@@ -98,6 +99,17 @@ public class resource {
     private String getLoggedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return ((UserDetails)auth.getPrincipal()).getUsername();
+    }
+
+    @RequestMapping(value = "/updateGuest", method = RequestMethod.POST)
+    public String editGuest(@RequestBody GuestPost guestPost) {
+        String weddingGuuid = guestPost.getGuuid();
+        Guest guest = guestPost.getGuest();
+        if (weddingService.updateGuest(weddingGuuid,guest)){
+            return "{\"response\":\"success\"}";
+        } else {
+            return "{\"response\":\"fail\"}";
+        }
     }
 
 
