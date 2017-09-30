@@ -98,6 +98,57 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
         })
     };
 
+    $rootScope.attending = function () {
+        var count = 0;
+        for (var i = 0; i <= $rootScope.myWedding.guests.length-1;i++) {
+            var gst = $rootScope.myWedding.guests[i];
+            if (gst.rsvp == "Attending") {
+                count = count + 1;
+            }
+        }
+
+        return count;
+    };
+
+    $rootScope.attendingPercent = function () {
+        var num = $rootScope.attending()/$rootScope.myWedding.guests.length;
+        return num*100;
+    };
+
+    $rootScope.notAttendingPercent = function () {
+        var num = $rootScope.notAttending()/$rootScope.myWedding.guests.length;
+        return num*100;
+    };
+
+    $rootScope.pendingPercent = function () {
+        var num = $rootScope.pending()/$rootScope.myWedding.guests.length;
+        return num*100;
+    };
+
+    $rootScope.notAttending = function () {
+        var count = 0;
+        for (var i = 0; i <= $rootScope.myWedding.guests.length-1;i++) {
+            var gst = $rootScope.myWedding.guests[i];
+            if (gst.rsvp == "Not Attending") {
+                count = count + 1;
+            }
+        }
+
+        return count;
+    };
+
+    $rootScope.pending = function () {
+        var count = 0;
+        for (var i = 0; i <= $rootScope.myWedding.guests.length-1;i++) {
+            var gst = $rootScope.myWedding.guests[i];
+            if (gst.rsvp == "Pending") {
+                count = count + 1;
+            }
+        }
+
+        return count;
+    };
+
     self.currentGuest = function (guest) {
         self.viewGuest = guest;
     }
