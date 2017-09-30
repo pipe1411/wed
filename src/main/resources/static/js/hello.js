@@ -98,8 +98,8 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
         })
     };
 
-    self.currentGuest = function (index) {
-        self.viewGuest = $rootScope.myWedding.guests[index];
+    self.currentGuest = function (guest) {
+        self.viewGuest = guest;
     }
 
     if($routeParams.id) {
