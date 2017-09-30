@@ -15,6 +15,15 @@ public class Guest {
     private String rsvp;
     private String telephone;
     private String guuid;
+    private String notes;
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
     public String getGuuid() {
         return this.guuid;
