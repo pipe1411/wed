@@ -29,11 +29,16 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
             templateUrl : 'landing.html',
             controller : 'navigation',
             controllerAs : 'controller'
+    }).when('/viewsurveys', {
+        templateUrl: 'survey.html',
+        controller: 'navigation',
+        controllerAs: 'controller'
     }).otherwise('/');
 
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-}).factory('weddingGuuid', function() {
+})
+    .factory('weddingGuuid', function() {
     var savedData = {}
     function set(guuid) {
         savedData = guuid;
@@ -46,7 +51,9 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
         set: set,
         get: get
     }
-}).controller('navigation', ['$rootScope', '$http', '$location', '$routeParams' ,'$route','$uibModal','weddingGuuid', function($rootScope, $http, $location, $routeParams ,$route,$uibModal,weddingGuuid) {
+})
+
+    .controller('navigation', ['$rootScope', '$http', '$location', '$routeParams' ,'$route','$uibModal','weddingGuuid', function($rootScope, $http, $location, $routeParams ,$route,$uibModal,weddingGuuid) {
 
     var self = this;
     self.guestPost = {};
@@ -73,6 +80,18 @@ angular.module('hello', [ 'ngRoute' ,'ui.bootstrap'])
             console.log("something happened with wedding");
         });
     };
+
+    var getSurveys = function () {
+        $rootScope.surveys = null;
+        $http.get('surveys').then(function (response) {
+            console.log(response.data);
+            $rootScope.surveys = response.data;
+        }, function() {
+            console.log("Something happened when retrieving surveys");
+        });
+    };
+
+    getSurveys();
 
     var getMyWeddings = function () {
         $rootScope.myWedding = null;

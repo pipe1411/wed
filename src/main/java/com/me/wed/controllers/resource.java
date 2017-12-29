@@ -1,7 +1,10 @@
 package com.me.wed.controllers;
 
 import com.me.wed.domain.*;
+import com.me.wed.domain.survey.Survey;
+import com.me.wed.services.SurveyService;
 import com.me.wed.services.WeddingService;
+import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +25,9 @@ public class resource {
 
     @Autowired
     private WeddingService weddingService;
+
+    @Autowired
+    private SurveyService surveyService;
 
     @RequestMapping("/resource")
     public Map<String,Object> home() {
@@ -77,9 +83,12 @@ public class resource {
         while (weddingIterator.hasNext()) {
             Wedding wedding = weddingIterator.next();
             if (wedding.getEmail().equals(getLoggedUser()) && wedding.getGuuid().equals(guuid.getGuuid())) {
+
                 return wedding;
             }
         }
+
+
 
         return null;
     }
@@ -89,11 +98,32 @@ public class resource {
         String weddingGuuid = guestPost.getGuuid();
         Guest guest = guestPost.getGuest();
         guest.setGuuid(UUID.randomUUID().toString());
+
+        Random rand = new Random();
+        int  n = rand.nextInt(99999998) + 1;
+        guest.setIdentifier(n);
+
+        Hashids hashids = new Hashids(guest.getGuuid());
+        String hash = hashids.encode(guest.getIdentifier());
+        guest.setReservationCode(hash);
+
+
         if (weddingService.addGuest(weddingGuuid,guest)){
             return "{\"response\":\"success\"}";
         } else {
             return "{\"response\":\"fail\"}";
         }
+    }
+
+    @RequestMapping(value = "/getReservation", method = RequestMethod.GET)
+    public Guest getReservation(@RequestBody String weddingGuuid, String reservationCode) {
+        Wedding wedding = weddingService.getWeddingById(weddingGuuid);
+        for(Guest guest : wedding.getGuests()) {
+            if (guest.getReservationCode().equals(reservationCode)) {
+                return guest;
+            }
+        }
+        return null;
     }
 
     private String getLoggedUser() {
@@ -111,6 +141,20 @@ public class resource {
             return "{\"response\":\"fail\"}";
         }
     }
+
+    @RequestMapping(value = "/surveys", method = RequestMethod.GET)
+    public ArrayList<Survey> getSurveys() {
+        Iterable<Survey> surveyIterable = surveyService.findAllSurveys();
+        Iterator<Survey> surveyIterator = surveyIterable.iterator();
+        ArrayList<Survey> surveys = new ArrayList<>();
+        while (surveyIterator.hasNext()) {
+            Survey survey = surveyIterator.next();
+            surveys.add(survey);
+        }
+
+        return surveys;
+    }
+
 
 
 }

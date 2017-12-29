@@ -25,6 +25,14 @@ public class ddguuid {
 
 
     public void addGuuidToGuest() throws Exception {
+        Wedding wedding = weddingService.getWeddingById("6140d9fb-d615-4198-8fe6-d08249b750dc");
+
+        for (Guest guest : wedding.getGuests()) {
+
+        }
+
+        weddingService.saveWedding(wedding);
+
         /*Wedding wedding = weddingService.getWeddingById("3439435f-7299-40ee-b103-28d1159dd282");
         for(Guest guest : wedding.getGuests()) {
             guest.setGuuid(UUID.randomUUID().toString());

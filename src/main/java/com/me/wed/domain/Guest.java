@@ -3,6 +3,8 @@ package com.me.wed.domain;
 
 import lombok.Data;
 
+import java.math.BigInteger;
+
 /**
  * Created by pipe on 8/5/17.
  */
@@ -16,6 +18,24 @@ public class Guest {
     private String telephone;
     private String guuid;
     private String notes;
+    private int identifier;
+    private String reservationCode;
+
+    public String getReservationCode() {
+        return reservationCode;
+    }
+
+    public void setReservationCode(String reservationCode) {
+        this.reservationCode = reservationCode;
+    }
+
+    public int getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(int identifier) {
+        this.identifier = identifier;
+    }
 
     public String getNotes() {
         return notes;

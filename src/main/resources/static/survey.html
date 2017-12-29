@@ -1,0 +1,111 @@
+<div id="wrapper">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Surveys</h1>
+                <div class="panel-body" ng-repeat="survey in surveys">
+                    <div class="panel-group" id="parent{{$index}}">
+                        <div class="panel panel-default" >
+
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="parent{{$index}}" href="guest{{$index}}">{{survey.name}}</a>
+                                </h5>
+                            </div>
+
+                            <div id="guest{{$index}}" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                        <div class="ibox ">
+                                            <div class="ibox-content">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active">
+                                                        <div class="client-detail">
+                                                            <div class="full-height-scroll" full-scroll>
+                                                                <strong>Information</strong>
+
+                                                                <ul class="list-group clear-list">
+                                                                    <li class="list-group-item fist-item">
+                                                                        email<br/>
+                                                                        <span class="pull-right"> {{survey.email}}</span>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        Telephone<br/>
+                                                                        <span class="pull-right"> {{survey.phone}} </span>
+                                                                    </li>
+
+
+                                                                    <li class="list-group-item">
+                                                                        Country<br/>
+                                                                        <span class="pull-right"> {{survey.country}}</span>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        Attending<br/>
+                                                                        <span class="pull-right">{{survey.attending}}</span>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        Lives outside Colombia<br/>
+                                                                        <span class="pull-right"> {{survey.livesOutsideColombia}}</span>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        Dates<br/>
+                                                                        <span class="pull-right"> {{survey.fromDate}} to {{survey.toDate}}</span>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        Medellin Place <br/>
+                                                                        <span class="pull-right"> {{survey.medellinPlace}}</span>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        Staying at porton <br/>
+                                                                        <span class="pull-right"> {{survey.stayingAtPorton}}</span>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        Portin assistance <br/>
+                                                                        <span class="pull-right"> {{survey.portonAssist}}</span>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        Welcome Lunch <br/>
+                                                                        <span class="pull-right"> {{survey.isLunching}}</span>
+                                                                    </li>
+
+                                                                    <li class="list-group-item">
+                                                                        Make up<br/>
+                                                                        <span class="pull-right"> {{survey.makeup}}</span>
+                                                                    </li>
+
+                                                                    <li class="list-group-item">
+                                                                        Hair<br/>
+                                                                        <span class="pull-right"> {{survey.hair}}</span>
+                                                                    </li>
+
+                                                                    <li class="list-group-item">
+                                                                        Bus needed<br/>
+                                                                        <span class="pull-right"> {{survey.busNeeded}}</span>
+                                                                    </li>
+
+                                                                    <li class="list-group-item" ng-repeat="adult in survey.guests.adults">
+                                                                        Adult<br/>
+                                                                        <span class="pull-right"> name: {{adult.name}} allergies: {{adult.allergies}} plate: {{adult.plate}}</span>
+                                                                    </li>
+
+                                                                    <li class="list-group-item" ng-repeat="kid in survey.guests.kids">
+                                                                        kid<br/>
+                                                                        <span class="pull-right"> name: {{kid.name}} allergies: {{kid.allergies}}</span>
+                                                                    </li>
+
+                                                                </ul>
+                                                                <hr/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
